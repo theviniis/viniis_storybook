@@ -9,25 +9,25 @@ export const typography = {
     bold: '700',
   },
   size: {
-    paragraph: {
-      xxxs: '12px',
-      xxs: '14px',
-      xs: '16px',
-      sm: '20px',
-      md: '24px',
-      lg: '32px',
-      xl: '40px',
-      xxl: '48px',
-    },
-    lineHeight: {
-      default: 1,
-      xs: 1.15,
-      sm: 1.2,
-      md: 1.33,
-      lg: 1.5,
-      xl: 1.7,
-      xxl: 2,
-    },
+    xxxs: 10,
+    xxs: 12,
+    xs: 14,
+    sm: 16,
+    md: 18,
+    lg: 20,
+    xl: 24,
+    xxl: 30,
+    xxxl: 36,
+    xxxxl: 48,
+  },
+  lineHeight: {
+    default: 1,
+    xs: 1.15,
+    sm: 1.2,
+    md: 1.33,
+    lg: 1.5,
+    xl: 1.7,
+    xxl: 2,
   },
 } as const;
 
@@ -96,12 +96,13 @@ export const gradient = {
 } as const;
 
 export const spacing = {
-  nano: 4,
+  xxsmall: 4,
   xsmall: 8,
-  small: 16,
-  medium: 24,
-  large: 32,
-  xlarge: 40,
+  small: 12,
+  medium: 16,
+  large: 20,
+  xlarge: 24,
+  xxlarge: 28,
 } as const;
 
 export const border = {
@@ -168,3 +169,5 @@ export const KEYFRAMES = {
 export const transitions = {
   default: `ease-in-out 200ms`,
 };
+
+export type DEFAULT_SIZES = 'xsmall' | 'small' | 'medium' | 'large' | 'xlarge';

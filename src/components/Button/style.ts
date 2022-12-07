@@ -1,8 +1,7 @@
 import styled, { css, FlattenSimpleInterpolation } from 'styled-components';
 import { border, spacing } from '../../shared';
-import { Icon } from '../Icon';
-import { P1 } from '../Typography';
-import { ButtonProps, SetVariantProps } from './types';
+import { SetVariantProps, StyledButtonProps } from './types';
+import { Typography } from '../';
 
 const setVariant = ({
   theme,
@@ -10,14 +9,6 @@ const setVariant = ({
   variant,
   disabled,
 }: SetVariantProps): FlattenSimpleInterpolation => {
-  if (disabled) {
-    return css`
-      background-color: ${theme.neutral[200].color};
-      border-color: ${theme.neutral[200].color};
-      color: ${theme.neutral[200].fontColor};
-    `;
-  }
-
   const colorDefault = 100;
   const colorHover = 500;
   const colorFocus = 600;
@@ -37,6 +28,11 @@ const setVariant = ({
         background: theme[skin][colorFocus].color,
         border: theme[skin][colorFocus].color,
       },
+      disabled: {
+        color: theme.neutral[200].fontColor,
+        background: theme.neutral[200].color,
+        border: theme.neutral[200].color,
+      },
     },
     stroke: {
       color: theme[skin][colorDefault].color,
@@ -51,6 +47,11 @@ const setVariant = ({
         color: theme[skin][colorFocus].fontColor,
         background: theme[skin][colorFocus].color,
         border: theme[skin][colorFocus].color,
+      },
+      disabled: {
+        color: theme.neutral[200].color,
+        background: 'transparent',
+        border: theme.neutral[200].color,
       },
     },
     ghost: {
@@ -67,8 +68,21 @@ const setVariant = ({
         background: 'transparent',
         border: 'transparent',
       },
+      disabled: {
+        color: theme.neutral[200].color,
+        background: 'transparent',
+        border: 'transparent',
+      },
     },
-  };
+  } as const;
+
+  if (disabled) {
+    return css`
+      color: ${variantOptions[variant].disabled.color};
+      background-color: ${variantOptions[variant].disabled.background};
+      border-color: ${variantOptions[variant].disabled.border};
+    `;
+  }
 
   return css`
     color: ${variantOptions[variant].color};
@@ -88,23 +102,21 @@ const setVariant = ({
   `;
 };
 
-export const Button = styled(P1)<Omit<ButtonProps, 'icon' | 'children'>>`
+export const Button = styled(Typography)<StyledButtonProps>`
   display: flex;
   gap: ${spacing.xsmall}px;
   align-items: center;
+  justify-content: center;
   flex-direction: ${({ iconPosition }) =>
     iconPosition === 'start' ? 'row' : 'row-reverse'};
-  padding: ${spacing.xsmall}px ${spacing.small}px;
   cursor: ${({ disabled }) => (disabled ? 'not-allowed' : 'pointer')};
   border-radius: ${border.radius.xsmall}px;
   border-style: solid;
   border-width: ${border.width.xsmall}px;
+  padding: ${({ size }) => `${size / 2}px ${size}px`};
+
+  ${({ fullWidth }) => (fullWidth ? 'width: 100%' : '')};
 
   ${({ theme, skin, variant, disabled }) =>
     setVariant({ theme, skin, variant, disabled })};
-`;
-
-export const IconWrapper = styled(Icon)`
-  border-left: 1px solid red;
-  height: 100%;
 `;
