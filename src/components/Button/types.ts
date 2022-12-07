@@ -7,10 +7,10 @@ export interface ButtonProps
   extends React.HTMLAttributes<HTMLButtonElement>,
     Pick<IconProps, 'icon'> {
   children: string;
-  skin: 'primary' | 'secondary' | 'success' | 'error';
-  variant: 'default' | 'stroke' | 'ghost';
+  skin?: 'primary' | 'secondary' | 'success' | 'error';
+  variant?: 'default' | 'stroke' | 'ghost';
   disabled?: boolean;
-  size: BUTTON_SIZES;
+  size?: BUTTON_SIZES;
   iconPosition?: 'start' | 'end';
   fullWidth?: boolean;
 }

@@ -2,7 +2,7 @@ import React from 'react';
 import { spacing } from '../../shared';
 
 export interface IconProps extends React.HTMLAttributes<HTMLSpanElement> {
-  icon: 'checkSquare';
+  icon?: 'checkSquare';
   variant?: 'stroke' | 'fill';
   skin?: string;
   size?: keyof typeof spacing;
